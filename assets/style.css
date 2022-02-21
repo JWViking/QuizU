@@ -41,6 +41,12 @@ header {
     background-color: rgb(255, 102, 153);
 }
 
+.hurry-up {
+    color: rgb(255, 0, 0);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 900;
+}
+
 .score-box {
     width:15px;
     background-color: white;
