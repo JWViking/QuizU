@@ -19,7 +19,21 @@ header {
 .quiz-title {
     background:linear-gradient(0.25turn, rgb(149, 224, 99), #ebf8e1, rgb(255, 102, 153));
     width:50%;
+    font-family:fantasy;
+    font-size: larger;
+    font-weight: bolder;
+}
 
+.start-btn {
+    width: 20%;
+    height: 40%;
+    background-color: aquamarine;
+    border-radius: 10px;
+    border-width: 6px;
+    border-color: black;
+    border-style:ridge;
+    font-size: large;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .score-title {
@@ -27,8 +41,50 @@ header {
     background-color: rgb(255, 102, 153);
 }
 
+.score-box {
+    width:15px;
+    background-color: white;
+    border-color: black;
 
-/* QuizU Body Style */
+}
+
+/* Quiz Styles*/
 .quiz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-justify: center;
+    text-align: center;
+}
 
+.question {
+    margin: 5% 0 3% 0;
+
+}
+
+/* button Section */
+
+.button-div {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.button-style {
+    width: 50%;
+    height:4rem;
+    background-color: rgb(255, 102, 153);
+}
+
+/* High Scores */
+.scores {
+    display: flex;
+    flex-direction: column;
+    text-justify: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
