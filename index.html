@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
-    <script src="assets/script.js"></script>
+    <!-- <script src="assets/script.js"></script> -->
     <title>QuizU</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
         <!-- timer -->
         <div class="timer-section" id="countdown">
             <h3 class="timer-style" id="timer">Quiz Timer Countdown</h3>
-            <div id="score" class="hurry-up"></div>
+            <div id="score"></div>
         </div>
         <!-- Title and Start Button -->
         <div class ="quiz-title" id="title">
@@ -27,11 +27,9 @@
         </div>
     </header>
     <!-- quiz questions -->
-    <section class="quiz" Id="quiz-display">
-        <div class="question" id="question-id">
-            <h2 >
-                This is my question?
-            </h2>
+    <section class="quiz" id="quiz-display">
+        <div class="question" id="question">
+            <h2 id="question-id"></h2>
         </div>
         <div class="button-div">
             <button class="button-style" id="button1"></button>
@@ -48,5 +46,6 @@
     <footer>
         <h4></h4>
     </footer> 
+    <script src="assets/script.js"></script>
 </body>
 </html>

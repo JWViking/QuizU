@@ -37,8 +37,12 @@ header {
 }
 
 .score-title {
-    width: 25%;
+    display:flex;
+    flex-direction: column;
+    width: 35%;
+    align-items: center;
     background-color: rgb(255, 102, 153);
+
 }
 
 .hurry-up {
@@ -48,15 +52,16 @@ header {
 }
 
 .score-box {
-    width:15px;
+    width:25%;
     background-color: white;
     border-color: black;
+
 
 }
 
 /* Quiz Styles*/
 .quiz {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-content: center;
@@ -74,7 +79,7 @@ header {
 .button-div {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-items: center;
     justify-content: center;
     margin-bottom: 3rem;
 }
