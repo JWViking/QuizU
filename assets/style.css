@@ -99,3 +99,10 @@ header {
     align-content: center;
     text-align: center;
 }
+
+/* Modal Styles */
+form {
+    display:none;
+    
+
+}

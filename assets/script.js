@@ -7,7 +7,14 @@ var q1b3 = document.getElementById("button3");
 var q1b4 = document.getElementById("button4");
 
 var questionNum = 0;
-var score = 0;
+var time = 60;
+
+var user = [
+    {
+        name: userName,
+        score: userScore,
+    }
+]
 
 var questionArr = [
     {
@@ -57,7 +64,7 @@ startButtonEl.addEventListener("click", startHandler);
 //time is displayed with just the number. If the time is between 11 and 0, then the time adds the "seconds left"
 //words to the time number in red. If the time === 0, then the time is displayed as "time is up".
 function startHandler() {
-    var time = 60;
+    //var time = 60;
 
     displayQuestion();
 
@@ -88,7 +95,7 @@ function startHandler() {
 //When an answer button is clicked, if it equals the questionArr[questionNum].answer, then the
 //score will be score = score + 1
 //Else, (if clicked button doesn't equal questionArr[questionNum].answer) then time = time - 10.
-//Then run the display question function again using a for loop.
+//Then make questionNum = 
 
 function displayQuestion () {
     question.innerHTML = questionArr[questionNum].question;
@@ -97,36 +104,38 @@ function displayQuestion () {
     q1b3.innerHTML = questionArr[questionNum].button3;
     q1b4.innerHTML = questionArr[questionNum].button4;
 
-    for (i=0; i< questionArr.length; i++) {
-        questionNum = (questionNum +1);
-
-        console.log(questionNum);
-
-        //if user clicks on a button to answer the question
-        button.addEventListener("click", evalAnswer);
-
-
-        evalAnswer();
-    }
+    //if user clicks on a button to answer the question
+    button.addEventListener("click", evalAnswer);
 };
 
 //evaluate answer function
-
-var evalAnswer = function(event) {
-
-    if (eventTarget === correctAnswer) {
-        scoreEl.textContent = (score + 10);
-    }
-    else {
-        time = (time - 10);
-    }
-}
 //compare questionNum to answer
 //return value of true or false
 //if true add points to score
 //else subtract time from timer
 
-//event listener on each button that run the evaluate answer function
+var evalAnswer = function(event) {
+
+    while (questionNum < questionArr.length) {
+        if (eventTarget === correctAnswer) {
+            score = (score + 10);
+            scoreEl.textContent = (score + 10);
+            questionNum = (questionNum + 1);
+        }
+        else {
+            time = (time - 10);
+            questionNum = (questionNum +1);
+        };
+
+    while (questionNum = questionArr.length) {
+        if (eventTarget ===correctAnswer) {
+            score = (score + 10);
+            scoreEl.textContent = score;
+            question.innerHTML = "Your final score is" + score + "!"
+        } 
+    };
+    
+};
 
 //after question 4,
 //add to high score to array 
