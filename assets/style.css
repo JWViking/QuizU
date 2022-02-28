@@ -13,7 +13,22 @@ header {
 .timer-section {
     width: 25%;
     background-color: rgb(149, 224, 99);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+}
+
+.timer-display {
+    width:25%;
+    background-color: white;
+    border-color: black;
+}
+
+.hurry-up {
+    color: rgb(255, 0, 0);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 900;
 }
 
 .quiz-title {
@@ -45,18 +60,10 @@ header {
 
 }
 
-.hurry-up {
-    color: rgb(255, 0, 0);
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 900;
-}
-
 .score-box {
     width:25%;
     background-color: white;
     border-color: black;
-
-
 }
 
 /* Quiz Styles*/
@@ -90,9 +97,29 @@ header {
     background-color: rgb(255, 102, 153);
 }
 
+.score {
+    display:none;
+    flex-direction:column;
+    border-top: .16em solid;
+    border-color: gray;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height:4rem;
+}
+
+.graded {
+    font-size: larger;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: green;
+    height:4rem;
+    /* width: 50%; */
+
+}   
+
 /* High Scores */
 .scores {
-    display: flex;
+    display: none;
     flex-direction: column;
     text-justify: center;
     justify-content: center;
@@ -101,8 +128,8 @@ header {
 }
 
 /* Modal Styles */
-form {
+.modal {
     display:none;
-    
+
 
 }

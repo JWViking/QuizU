@@ -13,11 +13,11 @@
         <!-- timer -->
         <div class="timer-section" id="countdown">
             <h3 class="timer-style" id="timer">Quiz Timer Countdown</h3>
-            <div id="score"></div>
+            <div class="timer-display" id="timer-display"></div>
         </div>
         <!-- Title and Start Button -->
-        <div class ="quiz-title" id="title">
-            <h1>QuizU</h1>
+        <div class ="quiz-title">
+            <h1 id="quiz-title-display">QuizU</h1>
             <button class ="start-btn" id="start">Start</button>
         </div>
         <!-- score -->
@@ -37,6 +37,9 @@
             <button class="button-style" id="button3"></button>
             <button class="button-style" id="button4"></button>
         </div>
+        <div class="score" id="score-id">
+            <span class="graded" id="graded-question"></span>
+        </div>
     </section>
     <!-- End Game Modal -->
     <section id ="end-modal" class="modal">
@@ -46,12 +49,15 @@
                 <input type="text" class="name-text" id="name-text-id">
             </div>
         </form>
+        <div Class ="score" id="last-score-id">
+            <span class="graded" id="last-graded-question"></span>
+        </div>
     </section>
     <!-- high scores -->
     <section class="scores" id="high-score">
         <h3>High Scores</h3>
         <ol id="high-score-list"></ol>
-    </section>  
+    </section>
     <footer>
         <h4></h4>
     </footer> 
