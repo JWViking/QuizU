@@ -60,23 +60,20 @@ var questionArr = [
         answer:"Data that can store more than one value.",
     },
 ]
-// display beginning score of 0
-scoreEl.textContent=score;
 
-//User clicks on the start button to start the quiz. There is an even listener that captures
-//the click. This starts a function that makes a timer countdown from 60 to zero. Question 
-//1 is also displayed from the click. 
-startButtonEl.addEventListener("click", startHandler);
-
-//the start time of the timer is 60 seconds. If the time displayed is between 11 and 61, then the 
-//time is displayed with just the number. If the time is between 11 and 0, then the time adds the "seconds left"
-//words to the time number in red. If the time === 0, then the time is displayed as "time is up".
+//startHandler is called when the start button is clicked
 function startHandler() {
-
+    
+    //call displayQuestion to set text for first question
     displayQuestion();
 
+    //display start score of 0
+    scoreEl.textContent=score;
+
+    //change display of quiz from none to flex.
     document.querySelector(".quiz").style.display="flex";
 
+    //start a countdown timer that starts at 60
     var timer = setInterval(function() {
         if (time >10 && time<61) {
             timerEl.textContent = time;
@@ -97,14 +94,7 @@ function startHandler() {
 
 };
 
-//the time is organized in an array. Question Num will determine which question
-//and answers show in the quiz section. 
-//When the start button is clicked, the question Num = 0. 
-//When an answer button is clicked, if it equals the questionArr[questionNum].answer, then the
-//score will be score = score + 1
-//Else, (if clicked button doesn't equal questionArr[questionNum].answer) then time = time - 10.
-//Then make questionNum = 
-
+//controls which object is being displayed from the array for each question
 function displayQuestion () {
     question.innerHTML = questionArr[questionNum].question;
     q1b1.innerHTML = questionArr[questionNum].button1;
@@ -114,12 +104,8 @@ function displayQuestion () {
 
 };
 
-//evaluate answer function
-//compare questionNum to answer
-//return value of true or false
-//if true add points to score
-//else subtract time from timer
-
+//When an answer button is clicked, this function is called.
+//??? Do I need to put a placeholder into the function to tell it data is coming?
 var evalAnswer = function() {
     console.log(this.textContent);
     
@@ -142,11 +128,12 @@ var evalAnswer = function() {
         };
         displayQuestion();
         console.log(time);
+        console.log ("score" + score);
     };
 
     var lastQuestion = document.getElementById("last-graded-question");
 
-    if (questionNum === questionArr.length-1) {
+    if (questionNum === 3) {
         console.log(this.textContent);
         console.log(questionNum);
         if (this.textContent === questionArr[questionNum].answer) {
@@ -168,24 +155,12 @@ var evalAnswer = function() {
             questionNum = (questionNum +1);
         }
         console.log(time);
+        console.log("score" + score);
         displayQuestion();
     }
     //displayQuestion();
-    
-    // if (this.textContent === questionArr[questionNum].answer){
-    //     lastQuestion.textContent = "Correct!";
-    //     var title = document.getElementById("quiz-title-display");
-    //         title.textContent = "Game Over";
-    //         title.classList.add("hurry-up");
-    // }
-    // else{
-    //     lastQuestion.textContent = "Wrong!"
-    //     var title = document.getElementById("quiz-title-display");
-    //         title.textContent = "Game Over";
-    //         title.classList.add("hurry-up");
-    // }
 
-    if (questionNum >= questionArr.length || time === "Time Is Up") {
+    if (questionNum >= 4 || time === "Time Is Up") {
          endGame();
     }
 };
@@ -218,7 +193,7 @@ var newHighScore = function () {
 
 //var saveScoreButton = document.getElementById("save-score")
 
-//if user clicks on a button to answer the question
+startButtonEl.addEventListener("click", startHandler);
 q1b1.addEventListener("click", evalAnswer);
 q1b2.addEventListener("click", evalAnswer);
 q1b3.addEventListener("click", evalAnswer);
