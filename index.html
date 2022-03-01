@@ -43,13 +43,20 @@
     </section>
     <!-- End Game Modal -->
     <section id ="end-modal" class="modal">
-        <form>
+        <h2 class="game-over">Game Over</h2>
+        <form class="form">
             <div class ="user-name-input" id="user-name-input">
-                <label for="user-name" class="user-name">User Name:</label>
-                <input type="text" class="name-text" id="name-text-id">
+                <div>
+                    <span class="final-score" id="final-score"></span>
+                </div>
+                <div>
+                    <label for="user-name" class="user-name">User Name:</label>
+                    <input type="text" class="name-text" id="name-text-id" placeholder="First Name, Last Name">
+                </div>
             </div>
+            <button class="save-score" id="save-score">Save Score</button>
         </form>
-        <div Class ="score" id="last-score-id">
+        <div Class ="last-score" id="last-score-id">
             <span class="graded" id="last-graded-question"></span>
         </div>
     </section>

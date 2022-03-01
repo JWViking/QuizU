@@ -7,6 +7,8 @@ var q1b2 = document.getElementById("button2");
 var q1b3 = document.getElementById("button3");
 var q1b4 = document.getElementById("button4");
 var gradedQuestion = document.getElementById("graded-question");
+var saveScoreButton = document.getElementById("save-score");
+var title = document.getElementById("quiz-title-display");
 
 var questionNum = 0;
 var time = 60;
@@ -61,7 +63,7 @@ var questionArr = [
 // display beginning score of 0
 scoreEl.textContent=score;
 
-//User clicks on the start button to start the quiz. There is an even tlistener that captures
+//User clicks on the start button to start the quiz. There is an even listener that captures
 //the click. This starts a function that makes a timer countdown from 60 to zero. Question 
 //1 is also displayed from the click. 
 startButtonEl.addEventListener("click", startHandler);
@@ -90,11 +92,6 @@ function startHandler() {
             time = "Time Is Up";
             timerEl.textContent = time;
             clearInterval(timer);
-
-            var title = document.getElementById("quiz-title-display");
-            title.textContent = "Game Over"
-            title.classList.add("hurry-up");
-            endGame(evalAnswer);
         }
     }, 1000);  
 
@@ -128,7 +125,7 @@ var evalAnswer = function() {
     
     document.querySelector(".score").style.display="flex";
 
-    if (questionNum < questionArr.length-1) {
+    if (questionNum <= 2) {
         console.log(questionNum);
         if (this.textContent === questionArr[questionNum].answer) {
             score = (score + 10);
@@ -143,54 +140,86 @@ var evalAnswer = function() {
             gradedQuestion.classList.add("hurry-up");
             gradedQuestion.textContent = "Wrong!"
         };
+        displayQuestion();
+        console.log(time);
     };
 
-    if (this.textContent === questionArr[questionNum].answer) {
+    var lastQuestion = document.getElementById("last-graded-question");
+
+    if (questionNum === questionArr.length-1) {
+        console.log(this.textContent);
         console.log(questionNum);
-        score = (score + 10);
-        scoreEl.textContent = score;
-    } 
-    else {
-        time = (time - 10);
-        gradedQuestion.classList.add("hurry-up");
+        if (this.textContent === questionArr[questionNum].answer) {
+            score = (score + 10);
+            scoreEl.textContent = score;
+            lastQuestion.textContent = "Correct!";
+
+            //title.textContent = "Game Over";
+            //title.classList.add("hurry-up");
+            //time = 0;
+            questionNum = (questionNum +1);
+
+        }
+        else {
+            time = (time - 10);
+            lastQuestion.textContent = "Wrong!"
+            lastQuestion.classList.add("hurry-up");
+            //time = 0;
+            questionNum = (questionNum +1);
+        }
+        console.log(time);
     }
-    displayQuestion();
+    //displayQuestion();
+    
+    // if (this.textContent === questionArr[questionNum].answer){
+    //     lastQuestion.textContent = "Correct!";
+    //     var title = document.getElementById("quiz-title-display");
+    //         title.textContent = "Game Over";
+    //         title.classList.add("hurry-up");
+    // }
+    // else{
+    //     lastQuestion.textContent = "Wrong!"
+    //     var title = document.getElementById("quiz-title-display");
+    //         title.textContent = "Game Over";
+    //         title.classList.add("hurry-up");
+    // }
+
+    if (questionNum >= questionArr.length || time === "Time Is Up") {
+         endGame();
+    }
 };
-
-
 
 //endgame function.
 //change display of #quiz-display to hidden
 //change display of #end-modal to flex
 //in a function passing an argument of data, brought in by answerText,  
 
-var endGame = function (answerText) {
+var endGame = function () {
     console.log("endGame");
-    console.log(answerText);
+    time = 0;
     document.querySelector("#quiz-display").style.display="none";
     document.querySelector("#end-modal").style.display="flex";
+    document.getElementById("final-score").textContent = "Your final score is " + score + "!";
+
+
     //document.querySelector("#high-score").style.display="flex";
-    var lastQuestion = document.getElementById("last-graded-id");
-    
-    if (data = questionArr[questionNum].answer){
-        lastQuestion.textContent = "Correct!";
-    }
-    else{
-        lastQuestion.textContent = "Wrong!"
-    }
-
-
 };
 
- //if user clicks on a button to answer the question
- q1b1.addEventListener("click", evalAnswer);
- q1b2.addEventListener("click", evalAnswer);
- q1b3.addEventListener("click", evalAnswer);
- q1b4.addEventListener("click", evalAnswer);
+var newHighScore = function () {
+    document.querySelector("#end-modal").style.display="none";
+    document.querySelector("#high-score").style.display="flex";
+    
+    //localStorage.setItem
+    //json stringify
+    //localStorage.getItam
+    //json parse
+}
 
-//after question 4,
-//add to high score to array 
-//(localStorate.getItem) as an array
-//save to localStorage.setItem
+//var saveScoreButton = document.getElementById("save-score")
 
-//json parse and stringify 
+//if user clicks on a button to answer the question
+q1b1.addEventListener("click", evalAnswer);
+q1b2.addEventListener("click", evalAnswer);
+q1b3.addEventListener("click", evalAnswer);
+q1b4.addEventListener("click", evalAnswer);
+saveScoreButton.addEventListener("click", newHighScore());
