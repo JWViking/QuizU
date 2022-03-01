@@ -168,6 +168,7 @@ var evalAnswer = function() {
             questionNum = (questionNum +1);
         }
         console.log(time);
+        displayQuestion();
     }
     //displayQuestion();
     
