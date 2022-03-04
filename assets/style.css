@@ -98,7 +98,7 @@ header {
     background-color: rgb(255, 102, 153);
 }
 
-.last-score {
+.score {
     display:none;
     flex-direction:column;
     border-top: .16em solid;
@@ -106,7 +106,7 @@ header {
     justify-content: center;
     align-items: center;
     width: 50%;
-    height:4rem;
+    height:4rem; 
 }
 
 .graded {
@@ -117,16 +117,6 @@ header {
     /* width: 50%; */
 
 }   
-
-/* High Scores */
-.scores {
-    display: none;
-    flex-direction: column;
-    text-justify: center;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-}
 
 /* Modal Styles */
 .modal {
@@ -162,8 +152,17 @@ header {
     margin: .5em;
 }
 
-/* Final Score Styles */
+/* High Scores */
+.scores {
+    display: none;
+    flex-direction: column;
+    text-justify: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
 
+/* Final Score Styles */
 .final-score {
     font-size: larger;
     color: rgb(20, 4, 9);

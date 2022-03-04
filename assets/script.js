@@ -21,7 +21,7 @@ var score = 0;
 //     }
 // ]
 
-var questionArr = [
+const questionArr = [
     {
         question: "What is a switch statement?",
         button1:"A code statement that allows us to change our mind.",
@@ -79,15 +79,17 @@ function startHandler() {
             timerEl.textContent = time;
             time --;
         }
+        //add seconds left to timer in red
         else if (time >0 && time <11) {
             timerEl.textContent = time + '  Seconds Left';
             time --;
-            timerEl.classList.add("hurry-up");
-            
+            timerEl.classList.add("hurry-up");  
         }
+        //if time is <0, change time display to "time is up".
         else {
             time = "Time Is Up";
             timerEl.textContent = time;
+            //stop timer
             clearInterval(timer);
         }
     }, 1000);  
@@ -101,18 +103,17 @@ function displayQuestion () {
     q1b2.innerHTML = questionArr[questionNum].button2;
     q1b3.innerHTML = questionArr[questionNum].button3;
     q1b4.innerHTML = questionArr[questionNum].button4;
-
 };
 
 //When an answer button is clicked, this function is called.
-//??? Do I need to put a placeholder into the function to tell it data is coming?
-var evalAnswer = function() {
+var evalAnswer = function () {
     console.log(this.textContent);
     
+    //display beginning score of 0
     document.querySelector(".score").style.display="flex";
-
-    if (questionNum <= 2) {
-        console.log(questionNum);
+    
+    console.log(questionNum);
+        //if answer to question is correct
         if (this.textContent === questionArr[questionNum].answer) {
             score = (score + 10);
             scoreEl.textContent = score;
@@ -120,49 +121,27 @@ var evalAnswer = function() {
             questionNum = (questionNum + 1);
             gradedQuestion.textContent = "Correct!"
         }
+        //if answer to question is wrong
         else {
             time = (time - 10);
             questionNum = (questionNum +1);
             gradedQuestion.classList.add("hurry-up");
             gradedQuestion.textContent = "Wrong!"
         };
-        displayQuestion();
+        //control to only display questions if there are questions to display
+        if(questionNum < 4) {
+            displayQuestion();
+        };
+
         console.log(time);
         console.log ("score" + score);
-    };
 
-    var lastQuestion = document.getElementById("last-graded-question");
-
-    if (questionNum === 3) {
-        console.log(this.textContent);
-        console.log(questionNum);
-        if (this.textContent === questionArr[questionNum].answer) {
-            score = (score + 10);
-            scoreEl.textContent = score;
-            lastQuestion.textContent = "Correct!";
-
-            //title.textContent = "Game Over";
-            //title.classList.add("hurry-up");
-            //time = 0;
-            questionNum = (questionNum +1);
-
-        }
-        else {
-            time = (time - 10);
-            lastQuestion.textContent = "Wrong!"
-            lastQuestion.classList.add("hurry-up");
-            //time = 0;
-            questionNum = (questionNum +1);
-        }
-        console.log(time);
-        console.log("score" + score);
-        displayQuestion();
-    }
-    //displayQuestion();
-
-    if (questionNum >= 4 || time === "Time Is Up") {
+        //if questionNum is higher than number of questions, display
+        //time is up and run endgame function.
+        if (questionNum >= 4 || time === "Time Is Up") {
          endGame();
-    }
+        };
+    
 };
 
 //endgame function.
@@ -170,26 +149,38 @@ var evalAnswer = function() {
 //change display of #end-modal to flex
 //in a function passing an argument of data, brought in by answerText,  
 
-var endGame = function () {
-    console.log("endGame");
+var endGame = () => {
+    console.log("Start endGame");
     time = 0;
     document.querySelector("#quiz-display").style.display="none";
     document.querySelector("#end-modal").style.display="flex";
     document.getElementById("final-score").textContent = "Your final score is " + score + "!";
 
+    let newHighScore = () => {
+        document.querySelector("#end-modal").style.display="none";
+        //document.querySelector("#high-score").style.display="flex";
+        //???Why is this displaying before the endGame function is called?
 
-    //document.querySelector("#high-score").style.display="flex";
+        //Redundant const userDisplay = document.getElementById("name-text-id").textContent;
+    
+        var saveUser = () => {
+            var userEndGame = document.querySelector("input[name='player-name']");
+            var newUser = localStorage.setItem(userEndGame, score);
+            console.log(newUser); 
+        };
+    
+        var getUser = () => {
+            localStorage.getItem(userEndGame);
+        };
+    };
 };
 
-var newHighScore = function () {
-    document.querySelector("#end-modal").style.display="none";
-    document.querySelector("#high-score").style.display="flex";
-    
-    //localStorage.setItem
+
+
     //json stringify
     //localStorage.getItam
     //json parse
-}
+
 
 //var saveScoreButton = document.getElementById("save-score")
 
@@ -198,4 +189,4 @@ q1b1.addEventListener("click", evalAnswer);
 q1b2.addEventListener("click", evalAnswer);
 q1b3.addEventListener("click", evalAnswer);
 q1b4.addEventListener("click", evalAnswer);
-saveScoreButton.addEventListener("click", newHighScore());
+// saveScoreButton.addEventListener("click", newHighScore());
