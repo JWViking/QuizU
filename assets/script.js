@@ -8,6 +8,7 @@ var q1b3 = document.getElementById("button3");
 var q1b4 = document.getElementById("button4");
 var gradedQuestion = document.getElementById("graded-question");
 var title = document.getElementById("quiz-title-display");
+var reloadButtonEl = document.getElementById("restart");
 
 var questionNum = 0;
 var time = 45;
@@ -182,7 +183,11 @@ var makeList = function () {
     }
 };
 
+var playAgain = function () {
+  location.reload();
+}
 
+reloadButtonEl.addEventListener("click", playAgain);
 startButtonEl.addEventListener("click", startHandler);
 q1b1.addEventListener("click", evalAnswer);
 q1b2.addEventListener("click", evalAnswer);
