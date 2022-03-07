@@ -7,19 +7,13 @@ var q1b2 = document.getElementById("button2");
 var q1b3 = document.getElementById("button3");
 var q1b4 = document.getElementById("button4");
 var gradedQuestion = document.getElementById("graded-question");
-var saveScoreButton = document.getElementById("save-score");
 var title = document.getElementById("quiz-title-display");
 
 var questionNum = 0;
-var time = 60;
+var time = 45;
 var score = 0;
 
-// var user = [
-//     {
-//         name: userName,
-//         score: userScore,
-//     }
-// ]
+var highScores = JSON.parse(localStorage.getItem("highScores"))|| [];
 
 const questionArr = [
     {
@@ -77,23 +71,24 @@ function startHandler() {
     var timer = setInterval(function() {
         if (time >10 && time<61) {
             timerEl.textContent = time;
-            time --;
+            time--;
         }
         //add seconds left to timer in red
-        else if (time >0 && time <11) {
+        else if (time > 0 && time <11) {
             timerEl.textContent = time + '  Seconds Left';
-            time --;
+            time--;
             timerEl.classList.add("hurry-up");  
         }
         //if time is <0, change time display to "time is up".
         else {
-            time = "Time Is Up";
+            time = Math.max(time--, 0);
             timerEl.textContent = time;
             //stop timer
             clearInterval(timer);
+            endGame();
         }
+        console.log("Timer " + time);
     }, 1000);  
-
 };
 
 //controls which object is being displayed from the array for each question
@@ -133,60 +128,64 @@ var evalAnswer = function () {
             displayQuestion();
         };
 
-        console.log(time);
-        console.log ("score" + score);
+        console.log ("The score is " + score);
 
         //if questionNum is higher than number of questions, display
         //time is up and run endgame function.
-        if (questionNum >= 4 || time === "Time Is Up") {
-         endGame();
+        if (questionNum >= 4) {
+            time = 0;
+            timerEl.classList.add("hurry-up");
         };
     
 };
 
-//endgame function.
-//change display of #quiz-display to hidden
-//change display of #end-modal to flex
-//in a function passing an argument of data, brought in by answerText,  
 
+var saveScoreBtn = document.getElementById("save-score");
+    saveScoreBtn.addEventListener("click", newHighScore);
+
+console.log(saveScoreBtn);
 var endGame = () => {
     console.log("Start endGame");
-    time = 0;
     document.querySelector("#quiz-display").style.display="none";
     document.querySelector("#end-modal").style.display="flex";
     document.getElementById("final-score").textContent = "Your final score is " + score + "!";
-
-    let newHighScore = () => {
-        document.querySelector("#end-modal").style.display="none";
-        //document.querySelector("#high-score").style.display="flex";
-        //???Why is this displaying before the endGame function is called?
-
-        //Redundant const userDisplay = document.getElementById("name-text-id").textContent;
+    var saveScoreBtn = document.getElementById("save-score");
+    saveScoreBtn.addEventListener("click", newHighScore);
     
-        var saveUser = () => {
-            var userEndGame = document.querySelector("input[name='player-name']");
-            var newUser = localStorage.setItem(userEndGame, score);
-            console.log(newUser); 
-        };
-    
-        var getUser = () => {
-            localStorage.getItem(userEndGame);
-        };
-    };
 };
 
 
+function newHighScore(event) {
+    event.preventDefault();
+    document.querySelector("#end-modal").style.display="none";
+    document.querySelector("#high-score").style.display="flex";
 
-    //json stringify
-    //localStorage.getItam
-    //json parse
+    var saveUser = () => {
+        var userEndGame = document.getElementById("name-text-id").value;
+        highScores = JSON.parse(localStorage.getItem("highScores"))|| [];
+        highScores.push({name: userEndGame, score: score})
+        localStorage.setItem('highScores', JSON.stringify(highScores));
+        console.log(userEndGame); 
+        makeList();
+    };
+    saveUser();
+};
 
+var makeList = function () {
+    console.log();
+    varUlEl = document.getElementById("high-score-list");
+    for (var i=0; i<highScores.length; i++) {
+        varLiEl= document.createElement("li");
+        varLiEl.innerHTML = "Name: " + highScores[i].name + " Score: " + highScores[i].score;
+        varLiEl.style.listStyleType = "none"
+        varUlEl.appendChild(varLiEl);
+    }
+};
 
-//var saveScoreButton = document.getElementById("save-score")
 
 startButtonEl.addEventListener("click", startHandler);
 q1b1.addEventListener("click", evalAnswer);
 q1b2.addEventListener("click", evalAnswer);
 q1b3.addEventListener("click", evalAnswer);
 q1b4.addEventListener("click", evalAnswer);
-// saveScoreButton.addEventListener("click", newHighScore());
+// saveScoreBtn.addEventListener("submit", newHighScore());
